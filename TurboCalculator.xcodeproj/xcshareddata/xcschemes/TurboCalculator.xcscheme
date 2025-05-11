@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1510"
+   LastUpgradeVersion = "1630"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -29,7 +29,10 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:UITests/TurboCalculator.xctestplan"
+            reference = "container:UITests/TurboCalculator.xctestplan">
+         </TestPlanReference>
+         <TestPlanReference
+            reference = "container:CustomTestPlan.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>

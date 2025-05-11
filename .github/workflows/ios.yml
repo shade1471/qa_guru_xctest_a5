@@ -4,6 +4,22 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
+    inputs:
+      device:
+        description: 'Select device for testing'
+        required: true
+        type: choice
+        options:
+          - iPhone 15
+          - iPhone 16 Pro
+      test_plan:
+        description: 'Select Test plan for run'
+        required: true
+        type: choice
+        options:
+          - TurboCalculator
+          - CustomTestPlan
+    
 
 jobs:
   build:
@@ -13,16 +29,34 @@ jobs:
     steps:
       - name: Get current environment
         run: env
+      
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Build iOS app
-        run: fastlane ios app_build
-      - name: Run all UI-tests
-        run: fastlane ios app_test
+        run: fastlane ios app_build device:"${{ github.event.inputs.device }}"
+      
+      - name: Run Test Plan tests
+        run:
+          fastlane ios app_test device:"${{ github.event.inputs.device }}"
+          testplan:"${{ github.event.inputs.test_plan }}"
+      
       - name: Save xcresult
         if: ${{ always() }}
         uses: actions/upload-artifact@v4.3.3
         with:
           name: 'Report'
           path: 'Report'
-          retention-days: 15       
+          retention-days: 15
+      
+      - name: Get commit message
+        if: ${{ always()}}
+        id: get_commit_message
+        run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
+
+      - name: Print last commit message
+        if: ${{ always() }}
+        run: |
+          echo "Last Commit massage: ${{ steps.get_commit_message.outputs.COMMIT_MESSAGE }} :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "Current test plan: ${{ github.event.inputs.test_plan }}" >> $GITHUB_STEP_SUMMARY
+          echo "Current test device: ${{ github.event.inputs.device }}" >> $GITHUB_STEP_SUMMARY   

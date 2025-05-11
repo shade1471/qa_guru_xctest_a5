@@ -1,0 +1,32 @@
+{
+  "configurations" : [
+    {
+      "id" : "CFDD52A1-604D-4CE6-88F2-6938717AD664",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "UITestsLaunchTests\/testDebugTree()",
+        "UITestsLaunchTests\/testFail()",
+        "UITestsLaunchTests\/testRecorded()",
+        "UITestsLaunchTests\/testSafari()",
+        "UITestsLaunchTests\/testScreenshot()",
+        "UITestsLaunchTests\/testSkip()"
+      ],
+      "target" : {
+        "containerPath" : "container:TurboCalculator.xcodeproj",
+        "identifier" : "F5804C9F2BE95815004EB41E",
+        "name" : "UITests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -57,6 +57,6 @@ jobs:
       - name: Print last commit message
         if: ${{ always() }}
         run: |
-          echo "Last Commit massage: ${{ steps.get_commit_message.outputs.COMMIT_MESSAGE }} :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "Last commit message: ${{ steps.get_commit_message.outputs.COMMIT_MESSAGE }} :rocket:" >> $GITHUB_STEP_SUMMARY
           echo "Current test plan: ${{ github.event.inputs.test_plan }}" >> $GITHUB_STEP_SUMMARY
           echo "Current test device: ${{ github.event.inputs.device }}" >> $GITHUB_STEP_SUMMARY   
